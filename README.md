@@ -31,7 +31,7 @@ $ coolhttpd
 ```
  $ coolhttpd --host <IP-ADDRESS> --port <PORT>
 ```
-+ Enable Authentication? coolhttpd support basic authentication scheme defined in [RFC 7235](https://tools.ietf.org/html/rfc7235)
++ Enable Authentication? coolhttpd support basic authentication scheme defined in [RFC 2617](https://tools.ietf.org/html/rfc2617)
 ```
 $ coolhttpd --username <USERNAME> --passwd <PASSWD>
 ```
