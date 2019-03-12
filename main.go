@@ -17,14 +17,12 @@ import (
 	"path"
 	"strconv"
 	"strings"
-	"syscall"
 	"time"
 )
 
 type Config struct {
 	Host      string
 	Port      uint
-	Chroot    bool
 	Username  string
 	Passwd    string
 	Directory string
@@ -37,42 +35,6 @@ type File struct {
 	Modified string `json:"modified"`
 	Size     int64  `json:"size"`
 	Contents []File `json:"contents"`
-}
-
-func colorCodePadding(str string, fgNo int, bgNo int) (ColoredCode string) {
-
-	fgCodes := map[int]string{
-		0: "[30m",
-		1: "[31m",
-		2: "[32m",
-		3: "[33m",
-		4: "[34m",
-		5: "[35m",
-		6: "[36m",
-		7: "[37m",
-		9: "[39m",
-	}
-
-	bgCodes := map[int]string{
-		0: "[40m",
-		1: "[41m",
-		2: "[42m",
-		3: "[43m",
-		4: "[44m",
-		5: "[45m",
-		6: "[46m",
-		7: "[47m",
-		9: "[49m",
-	}
-
-	ColoredCode = fmt.Sprintf(
-		"\033%s\033%s%s\033[30m\033[40m",
-		bgCodes[bgNo],
-		fgCodes[fgNo],
-		str,
-	)
-
-	return
 }
 
 func getDirList(rootdir string) (f File, err error) {
@@ -123,13 +85,7 @@ func renderDirectory(f File, w http.ResponseWriter) {
 
 func directoryListingHandler(w http.ResponseWriter, r *http.Request) {
 
-	var err error
-	var f File
-	if config.Chroot {
-		f, err = getDirList("/")
-	} else {
-		f, err = getDirList(config.Directory)
-	}
+	f, err := getDirList(config.Directory)
 	w.Header().Add("Content-Type", "text/html; charset=utf-8")
 
 	if err != nil {
@@ -204,7 +160,6 @@ func LoggingMiddleware(handlerFunc http.HandlerFunc) http.HandlerFunc {
 }
 
 var config = Config{
-	Chroot:    false,
 	Username:  "test",
 	Passwd:    "123",
 	Directory: ".",
@@ -214,7 +169,6 @@ var config = Config{
 
 func setupConfig() {
 
-	flag.BoolVar(&config.Chroot, "chroot", config.Chroot, "Locks the server into chroot")
 	flag.StringVar(&config.Username, "username", config.Username, "Username for the Basic Authentication")
 	flag.StringVar(&config.Passwd, "passwd", config.Passwd, "Password for the Basc Authentication")
 	flag.StringVar(&config.Host, "host", config.Host, "ip address for the server")
@@ -224,31 +178,9 @@ func setupConfig() {
 	flag.Parse()
 }
 
-func setupChroot() {
-
-	var err error
-
-	if !config.Chroot {
-		return
-	}
-
-	err = syscall.Chdir(config.Directory)
-	if err != nil {
-		panic(err)
-	}
-
-	err = syscall.Chroot(config.Directory)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Chrooted to ", config.Directory)
-}
-
 func main() {
 
 	setupConfig()
-	setupChroot()
 
 	http.Handle("/", LoggingMiddleware(AuthMiddleware(directoryListingHandler)))
 	http.Handle("/file/", LoggingMiddleware(AuthMiddleware(fileServingHandler)))
