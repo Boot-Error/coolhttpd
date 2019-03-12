@@ -41,3 +41,15 @@ $ coolhttpd --dir <DIRECTORY TO SERVE>
 ```
 
 ## :floppy_disk: Install
+
++ Install from source, requires golang toolchain installed on your system.
+```
+# download the source using go get
+$ go get -v github.com/Boot-Error/coolhttpd
+
+# compile the source
+$ go install coolhttpd
+
+# the compiled binary can be found in $GOPATH/bin, refer Usage
+$ $GOPATH/bin/coolhttpd <ARGS>
+```
