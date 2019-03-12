@@ -48,7 +48,7 @@ $ coolhttpd --dir <DIRECTORY TO SERVE>
 $ go get -v github.com/Boot-Error/coolhttpd
 
 # compile the source
-$ go install coolhttpd
+$ go install github.com/Boot-Error/coolhttpd
 
 # the compiled binary can be found in $GOPATH/bin, refer Usage
 $ $GOPATH/bin/coolhttpd <ARGS>
