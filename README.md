@@ -10,14 +10,14 @@
 </div>
 <br/>
 
+<p align="center">
+  <img src="coolhttpddemo.gif" alt="demo"></img>
+</p>
+
 **coolhttpd** is my attempt to solve a part of my workflow
 
 >Everytime I need to copy X thing from *one computer* to *another*, I need to do either of these
 > `python -m http.server -p 8080` or `cat file > nc -l 8080`
-
-<p align="center">
-  <img src="coolhttpddemo.gif" alt="demo"></img>
-</p>
 
 ## :art: Features
 
