@@ -15,9 +15,9 @@
 >Everytime I need to copy X thing from *one computer* to *another*, I need to do either of these
 > `python -m http.server -p 8080` or `cat file > nc -l 8080`
 
-<div style="text-align:center">
-  <img align="center" src="coolhttpddemo.gif"></img>
-</div>
+<p align="center">
+  <img src="coolhttpddemo.gif" alt="demo"></img>
+</p>
 
 ## :art: Features
 
