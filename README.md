@@ -25,7 +25,7 @@
 + Supports basic authentication
 + Directory tree view showing every file/folder
 
-And more, see [ToDo]("#todo")
+And more, see [ToDo](https://github.com/Boot-Error/coolhttpd#clipboard-to-do)
 
 ## :hammer: Usage
 
