@@ -25,6 +25,8 @@
 + Supports basic authentication
 + Directory tree view showing every file/folder
 
+And more, see [ToDo]("#todo")
+
 ## :hammer: Usage
 
 + Want to serve current working directoy straight away?
@@ -57,3 +59,9 @@ $ go install github.com/Boot-Error/coolhttpd
 # the compiled binary can be found in $GOPATH/bin, refer Usage
 $ $GOPATH/bin/coolhttpd <ARGS>
 ```
+
+## :clipboard: To-Do
+
++ Download whole directory as a zip archive
++ Fuzzy Search the serving directory
++ Support for wget's recursive download (still contemplating..)
